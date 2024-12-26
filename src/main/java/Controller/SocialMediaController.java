@@ -3,6 +3,9 @@ package Controller;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -36,7 +39,7 @@ public class SocialMediaController {
         app.post("/register", this::registrationHandler);
         app.post("/login", this::loginHandler);
         app.post("/messages", this::postHandler);
-        app.get("/message", this::allMessagesHandler);
+        app.get("/messages", this::allMessagesHandler);
         app.get("/message/{messageID}", this::messageByIdHandler);
         app.delete("/delete/{messageID}", this::deleteMsgByIdHandler);
         app.put("/update/{messageID}", this::updateMsgByIdHandler);
@@ -90,8 +93,11 @@ public class SocialMediaController {
      * This is an example handler for an example endpoint.
      * @param context The Javalin Context object manages information about both the HTTP request and response.
      */
-    private void allMessagesHandler(Context context) {
-        
+    private void allMessagesHandler(Context context) throws JsonProcessingException{
+        ObjectMapper om = new ObjectMapper();
+        List<Message> messages = msgService.getAllMessages();
+
+        context.json(om.writeValueAsString(messages));
     }
 
     /**

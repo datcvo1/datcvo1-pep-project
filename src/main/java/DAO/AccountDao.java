@@ -76,7 +76,7 @@ public class AccountDao {
         Connection connection = ConnectionUtil.getConnection();
 
         try {
-            String sql = "SELECT (username, password) FROM account WHERE account_id = ?";
+            String sql = "SELECT username, password FROM account WHERE account_id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
 
             ps.setInt(1, id);
