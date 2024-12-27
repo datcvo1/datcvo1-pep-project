@@ -27,5 +27,24 @@ public class MessageService {
     public List<Message> getAllMessages() {
         return msgDao.getAllMessages();
     }
+
+    public Message getMessage(int message_id) {
+        return msgDao.getMessage(message_id);
+    }
+
+    public Message deleteMessage(int message_id) {
+        return msgDao.deleteMessage(message_id);
+    }
+
+    public Message updateMessage(String text, int id) {
+        if(getMessage(id) == null)
+            return null;
+
+        return msgDao.updateMessage(text, id);
+    }
+
+    public List<Message> getAllMessagesFrom(int id) {
+        return msgDao.getAllMessagesFrom(id);
+    }
     
 }
